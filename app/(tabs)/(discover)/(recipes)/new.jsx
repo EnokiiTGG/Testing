@@ -6,7 +6,7 @@ import { collection, doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { router } from 'expo-router';
 
-export default function SubmitRecipe() {
+export default function NewRecipe() {
   const uid = auth.currentUser?.uid;
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -16,8 +16,10 @@ export default function SubmitRecipe() {
   const [saving, setSaving] = useState(false);
 
   async function pickImage() {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== 'granted') { Alert.alert('Permission required', 'Please allow photo access.'); return; }
     const res = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images, quality: 0.8
+      mediaTypes: ImagePicker.MediaTypeOptions.Images, quality: 0.85
     });
     if (!res.canceled) setImageUri(res.assets[0].uri);
   }
@@ -28,23 +30,17 @@ export default function SubmitRecipe() {
 
     setSaving(true);
     try {
-      // 1) create doc id first
       const recipeRef = doc(collection(db, 'recipes'));
 
-      // 2) upload image (optional)
       let imageStoragePath = '';
       let imageURL = '';
       if (imageUri) {
         imageStoragePath = `recipes/${uid}/${recipeRef.id}/main.jpg`;
-        const storageRef = ref(storage, imageStoragePath);
-
-        // fetch the file into a blob
         const blob = await (await fetch(imageUri)).blob();
-        await uploadBytes(storageRef, blob, { contentType: 'image/jpeg' });
-        imageURL = await getDownloadURL(storageRef);
+        await uploadBytes(ref(storage, imageStoragePath), blob, { contentType: 'image/jpeg' });
+        imageURL = await getDownloadURL(ref(storage, imageStoragePath));
       }
 
-      // 3) write recipe with status=pending
       await setDoc(recipeRef, {
         ownerUid: uid,
         title: title.trim(),
@@ -58,7 +54,7 @@ export default function SubmitRecipe() {
         updatedAt: serverTimestamp(),
       });
 
-      Alert.alert('Submitted!', 'Your recipe was sent to our nutritionists for approval.');
+      Alert.alert('Submitted!', 'Sent to nutritionists for approval.');
       router.back();
     } catch (e) {
       console.error(e);
