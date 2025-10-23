@@ -115,6 +115,18 @@ export default function AddMealMainScreen() {
             <Text style={styles.addButtonText}>+</Text>
           </TouchableOpacity>
         </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.actionCard}
+          onPress={() => router.push('/(tabs)/(add)/submit-recipe')}
+        >
+          <View style={styles.actionIcon}><Text style={styles.actionEmoji}>🍽️</Text></View>
+          <View style={styles.actionContent}>
+            <Text style={styles.actionTitle}>Submit a Recipe</Text>
+            <Text style={styles.actionSubtitle}>Send to nutritionist for approval</Text>
+          </View>
+          <Text style={styles.arrow}>›</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
