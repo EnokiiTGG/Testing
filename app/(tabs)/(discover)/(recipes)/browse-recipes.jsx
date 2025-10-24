@@ -68,7 +68,7 @@ export default function RecipesBrowse() {
 
       {/* Floating + button */}
       <Pressable
-        onPress={() => router.push('/(tabs)/recipes/new')}
+        onPress={() => router.push('/(tabs)/(discover)/(recipes)/new')}
         style={({ pressed }) => ({
           position: 'absolute',
           right: 20,

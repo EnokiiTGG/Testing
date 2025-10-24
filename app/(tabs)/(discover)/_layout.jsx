@@ -7,7 +7,7 @@ export default function DiscoverLayout() {
       <Stack.Screen name="index" />
       <Stack.Screen name="food-dictionary" />
       <Stack.Screen name="meal-recommendations" />
-      <Stack.Screen name="browse-recipe" options={{ headerShown: false }} />
+      <Stack.Screen name="(recipes)/browse-recipes" options={{ headerShown: false }} />
       <Stack.Screen name="(recipes)/new" options={{ headerShown: true, title: 'Submit Recipe' }} />
     </Stack>
   );
