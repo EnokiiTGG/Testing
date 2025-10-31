@@ -100,7 +100,7 @@ function RecipeCard({ item, colors: c }) {
     <TouchableOpacity
       activeOpacity={0.9}
       style={[styles.card, { backgroundColor: c.surface, borderColor: c.border }]}
-      onPress={() => {/* TODO: router.push to a detail page if you add one */}}
+      onPress={() => router.push({ pathname: '(recipes)/[id]', params: { id: item.id } })}
     >
       <Image source={imgPath || PLACEHOLDER} style={styles.thumb} />
       <View style={styles.cardBody}>
