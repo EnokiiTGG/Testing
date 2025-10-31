@@ -25,6 +25,7 @@ export default function RecipeDetail() {
       <Stack.Screen
         options={{
           title: item?.title || 'Recipe',
+          headerShown: true,
           headerStyle: { backgroundColor: c.bg },
           headerTintColor: c.text,
         }}
