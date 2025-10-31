@@ -4,7 +4,7 @@ import { useLocalSearchParams, Stack } from 'expo-router';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
-const PLACEHOLDER = require('@/assets/placeholder-recipe.jpg');
+const PLACEHOLDER = require('@/assets/placeholder-recipe.png');
 
 export default function RecipeDetail() {
   const { id } = useLocalSearchParams();          // recipe doc id
