@@ -10,7 +10,7 @@ import { auth, db, storage } from '@/lib/firebase';
 import { collection, doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
-const PLACEHOLDER = require('@/assets/placeholder-recipe.jpg');
+const PLACEHOLDER = require('@/assets/placeholder-recipe.png');
 
 export default function NewRecipe() {
   const scheme = useColorScheme();
